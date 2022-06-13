@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
-public class SimpleMessageDto {
+public class MessageDto {
     @JsonProperty
     private Long id;
 

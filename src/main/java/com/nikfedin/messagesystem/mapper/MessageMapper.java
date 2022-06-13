@@ -1,11 +1,11 @@
 package com.nikfedin.messagesystem.mapper;
 
-import com.nikfedin.messagesystem.dto.SimpleMessageDto;
+import com.nikfedin.messagesystem.dto.MessageDto;
 import com.nikfedin.messagesystem.entity.Message;
 
 public class MessageMapper {
-    public static SimpleMessageDto toMessageDto(Message message) {
-        return SimpleMessageDto.builder()
+    public static MessageDto toMessageDto(Message message) {
+        return MessageDto.builder()
                 .id(message.getId())
                 .sender(message.getSender())
                 .receiver(message.getReceiver())
@@ -16,7 +16,7 @@ public class MessageMapper {
                 .build();
     }
 
-    public static Message toMessage(SimpleMessageDto messageDto) {
+    public static Message toMessage(MessageDto messageDto) {
         return Message.builder()
                 .id(messageDto.getId())
                 .sender(messageDto.getSender())

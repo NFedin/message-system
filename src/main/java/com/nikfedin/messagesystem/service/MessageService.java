@@ -1,6 +1,6 @@
 package com.nikfedin.messagesystem.service;
 
-import com.nikfedin.messagesystem.dto.SimpleMessageDto;
+import com.nikfedin.messagesystem.dto.MessageDto;
 import com.nikfedin.messagesystem.entity.Message;
 import com.nikfedin.messagesystem.mapper.MessageMapper;
 import com.nikfedin.messagesystem.repository.MessageRepository;
@@ -20,34 +20,34 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
 
-    public List<SimpleMessageDto> getAllMessages(String receiverId) {
+    public List<MessageDto> getAllMessages(String receiverId) {
         List<Message> messages = messageRepository.findByReceiver(receiverId);
         if (messages.isEmpty()) {
             return Collections.emptyList();
         }
-        List<SimpleMessageDto> result = messages.stream().map(MessageMapper::toMessageDto).collect(Collectors.toList());
+        List<MessageDto> result = messages.stream().map(MessageMapper::toMessageDto).collect(Collectors.toList());
         readAndUpdate(messages);
         return result;
     }
 
-    public SimpleMessageDto readMessage(Long id) {
+    public MessageDto readMessage(Long id) {
         Optional<Message> optional = messageRepository.findById(id);
         if (optional.isPresent()) {
             Message message = optional.get();
-            SimpleMessageDto dto = MessageMapper.toMessageDto(message);
+            MessageDto dto = MessageMapper.toMessageDto(message);
             readAndUpdate(List.of(message));
             return dto;
         } else {
-            return SimpleMessageDto.builder().build();
+            return MessageDto.builder().build();
         }
     }
 
-    public List<SimpleMessageDto> getAllUnreadMessages(String receiverId) {
+    public List<MessageDto> getAllUnreadMessages(String receiverId) {
         List<Message> messages = messageRepository.findByReceiverAndUnread(receiverId, true);
         if (messages.isEmpty()) {
             return Collections.emptyList();
         }
-        List<SimpleMessageDto> result = messages.stream().map(MessageMapper::toMessageDto).collect(Collectors.toList());
+        List<MessageDto> result = messages.stream().map(MessageMapper::toMessageDto).collect(Collectors.toList());
         readAndUpdate(messages);
         return result;
     }

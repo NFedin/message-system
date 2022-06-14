@@ -14,12 +14,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "password",
+							"value": "pass123",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "1",
+							"value": "elvispresley",
 							"type": "string"
 						}
 					]
@@ -28,7 +28,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"sender\":2,\n    \"receiver\":1,\n    \"text\":\"Text\",\n    \"subject\":\"Subject\"\n}",
+					"raw": "{\n    \"receiver\":\"bobdylan\",\n    \"text\":\"Text1\",\n    \"subject\":\"Subject\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -36,11 +36,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/v1/message/write-message",
+					"raw": "https://message-system-abra.herokuapp.com/api/v1/message/write-message",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"message-system-abra",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -53,39 +55,154 @@
 		},
 		{
 			"name": "get all messages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bobdylan",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://message-system-abra.herokuapp.com/api/v1/message/get-all-messages",
+					"protocol": "https",
+					"host": [
+						"message-system-abra",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"message",
+						"get-all-messages"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "get all unread messages",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bobdylan",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://message-system-abra.herokuapp.com/api/v1/message/get-all-unread-messages",
+					"protocol": "https",
+					"host": [
+						"message-system-abra",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"message",
+						"get-all-unread-messages"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "read message",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bobdylan",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://message-system-abra.herokuapp.com/api/v1/message/read-message/1",
+					"protocol": "https",
+					"host": [
+						"message-system-abra",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"message",
+						"read-message",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "delete message",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bobdylan",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/v1/message/delete-message/1",
+					"raw": "https://message-system-abra.herokuapp.com/api/v1/message/delete-message/1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"message-system-abra",
+						"herokuapp",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",

@@ -2,6 +2,7 @@ package com.nikfedin.messagesystem.controller;
 
 import com.nikfedin.messagesystem.dto.MessageDto;
 import com.nikfedin.messagesystem.request.MessageRequest;
+import com.nikfedin.messagesystem.response.MessageResponse;
 import com.nikfedin.messagesystem.service.MessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,40 +24,47 @@ public class MessageController {
     private final MessageService messageService;
 
     @GetMapping(path = "/get-all-messages")
-    public ResponseEntity<Object> getAllMessages() throws AuthenticationException {
+    public ResponseEntity<MessageResponse> getAllMessages() throws AuthenticationException {
         List<MessageDto> result = messageService.getAllMessages(getUsername());
-        if (result.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body("Messages not found");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
+                .description(result.isEmpty() ? "Your messages were not found" : "Your messages were found")
+                .messages(result)
+                .build());
+
     }
 
     @GetMapping(path = "/get-all-unread-messages")
-    public ResponseEntity<Object> getAllUnreadMessages() throws AuthenticationException {
+    public ResponseEntity<MessageResponse> getAllUnreadMessages() throws AuthenticationException {
         List<MessageDto> result = messageService.getAllUnreadMessages(getUsername());
-        if (result.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body("Messages not found");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
+                .description(result.isEmpty() ? "You have not unread messages" : "Your unread messages were found")
+                .messages(result)
+                .build());
     }
 
     @GetMapping(path = "/read-message/{messageId}")
-    public ResponseEntity<Object> readMessage(@PathVariable Long messageId) {
+    public ResponseEntity<MessageResponse> readMessage(@PathVariable Long messageId) {
         MessageDto result = messageService.readMessage(messageId);
-        if (Objects.isNull(result.getId())) {
-            return ResponseEntity.status(HttpStatus.OK).body("Messages not found");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
+                .description(Objects.isNull(result.getId()) ? "Message was not found" : "Message was found")
+                .messages(Collections.singletonList(result))
+                .build());
     }
 
     @DeleteMapping(path = "/delete-message/{messageId}")
-    public ResponseEntity<String> deleteMessage(@PathVariable Long messageId) throws AuthenticationException {
-        return ResponseEntity.status(HttpStatus.OK).body(messageService.deleteMessage(getUsername(), messageId));
+    public ResponseEntity<MessageResponse> deleteMessage(@PathVariable Long messageId) throws AuthenticationException {
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
+                .description(messageService.deleteMessage(getUsername(), messageId))
+                .messages(Collections.emptyList())
+                .build());
     }
 
     @PostMapping(path = "/write-message")
-    public ResponseEntity<String> writeMessage(@RequestBody MessageRequest messageRequest) throws AuthenticationException {
-        return ResponseEntity.status(HttpStatus.OK).body(messageService.writeMessage(getUsername(), messageRequest));
+    public ResponseEntity<MessageResponse> writeMessage(@RequestBody MessageRequest messageRequest) throws AuthenticationException {
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
+                .description(messageService.writeMessage(getUsername(), messageRequest))
+                .messages(Collections.emptyList())
+                .build());
     }
 
     private String getUsername() throws AuthenticationException {

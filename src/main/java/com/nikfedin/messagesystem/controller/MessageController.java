@@ -47,7 +47,7 @@ public class MessageController {
         MessageDto result = messageService.readMessage(messageId);
         return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
                 .description(Objects.isNull(result.getId()) ? "Message was not found" : "Message was found")
-                .messages(Collections.singletonList(result))
+                .messages(Objects.isNull(result.getId()) ? Collections.emptyList() : Collections.singletonList(result))
                 .build());
     }
 

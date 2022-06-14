@@ -8,6 +8,7 @@ import com.nikfedin.messagesystem.request.MessageRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -74,7 +75,7 @@ public class MessageService {
                 .receiver(messageRequest.receiver())
                 .text(messageRequest.text())
                 .subject(messageRequest.subject())
-                .creationDate(new Date())
+                .creationDate(LocalDateTime.now())
                 .unread(true).build();
         messageRepository.save(message);
         return "Message was successfully written";

@@ -36,7 +36,7 @@ public class MessageService {
         if (optional.isPresent()) {
             Message message = optional.get();
             MessageDto dto = MessageMapper.toMessageDto(message);
-            readAndUpdate(List.of(message));
+            readAndUpdate(Collections.singletonList(message));
             return dto;
         } else {
             return MessageDto.builder().build();
@@ -72,9 +72,9 @@ public class MessageService {
     public String writeMessage(String sender, MessageRequest messageRequest) {
         Message message = Message.builder()
                 .sender(sender)
-                .receiver(messageRequest.receiver())
-                .text(messageRequest.text())
-                .subject(messageRequest.subject())
+                .receiver(messageRequest.getReceiver())
+                .text(messageRequest.getText())
+                .subject(messageRequest.getSubject())
                 .creationDate(LocalDateTime.now())
                 .unread(true).build();
         messageRepository.save(message);

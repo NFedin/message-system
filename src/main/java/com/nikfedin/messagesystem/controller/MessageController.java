@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.AuthenticationException;
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -60,10 +61,10 @@ public class MessageController {
     }
 
     @PostMapping(path = "/write-message")
-    public ResponseEntity<MessageResponse> writeMessage(@RequestBody MessageRequest messageRequest) throws AuthenticationException {
+    public ResponseEntity<MessageResponse> writeMessage(@Valid @RequestBody MessageRequest messageRequest) throws AuthenticationException {
         return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
-                .description(messageService.writeMessage(getUsername(), messageRequest))
-                .messages(Collections.emptyList())
+                .description("Message was successfully written")
+                .messages(Collections.singletonList(messageService.writeMessage(getUsername(), messageRequest)))
                 .build());
     }
 

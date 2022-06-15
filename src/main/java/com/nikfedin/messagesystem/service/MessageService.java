@@ -58,17 +58,17 @@ public class MessageService {
             Message message = optional.get();
             if (username.equals(message.getReceiver()) || username.equals(message.getSender())) {
                 messageRepository.deleteById(id);
+                return "Message was successfully deleted";
             } else {
                 return "Only owner or receiver can delete message";
             }
-            return "Message was successfully deleted";
         } else {
             return "Message not found";
         }
 
     }
 
-    public String writeMessage(String sender, MessageRequest messageRequest) {
+    public MessageDto writeMessage(String sender, MessageRequest messageRequest) {
         Message message = Message.builder()
                 .sender(sender)
                 .receiver(messageRequest.getReceiver())
@@ -76,8 +76,7 @@ public class MessageService {
                 .subject(messageRequest.getSubject())
                 .creationDate(LocalDateTime.now())
                 .unread(true).build();
-        messageRepository.save(message);
-        return "Message was successfully written";
+        return MessageMapper.toMessageDto(messageRepository.save(message));
     }
 
     private void readAndUpdate(List<Message> messages) {

@@ -14,9 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +52,7 @@ class MessageServiceTest {
                 .receiver("Chuck Norris")
                 .subject("subject")
                 .text("text")
-                .creationDate(LocalDateTime.of(LocalDate.of(2022, 1, 1), LocalTime.of(9, 15, 5)))
+                .creationDate(OffsetDateTime.now())
                 .unread(true)
                 .build();
         unreadMessage = Message.builder()
@@ -63,7 +61,7 @@ class MessageServiceTest {
                 .receiver("Chuck Norris")
                 .subject("subject")
                 .text("text")
-                .creationDate(LocalDateTime.of(LocalDate.of(2022, 2, 2), LocalTime.of(8, 30, 50)))
+                .creationDate(OffsetDateTime.now())
                 .unread(false)
                 .build();
         messageList = new ArrayList<>();

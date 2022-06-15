@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -29,7 +29,7 @@ public class MessageDto {
     private String subject;
 
     @JsonProperty
-    private LocalDateTime creationDate;
+    private OffsetDateTime creationDate;
 
     @JsonProperty
     private Boolean unread;

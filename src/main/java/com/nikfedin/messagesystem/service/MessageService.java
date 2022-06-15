@@ -8,7 +8,7 @@ import com.nikfedin.messagesystem.request.MessageRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -74,7 +74,7 @@ public class MessageService {
                 .receiver(messageRequest.getReceiver())
                 .text(messageRequest.getText())
                 .subject(messageRequest.getSubject())
-                .creationDate(LocalDateTime.now())
+                .creationDate(OffsetDateTime.now())
                 .unread(true).build();
         return MessageMapper.toMessageDto(messageRepository.save(message));
     }

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Builder
@@ -32,8 +32,8 @@ public class Message {
     private String text;
 
     private String subject;
-
-    private LocalDateTime creationDate;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime creationDate;
 
     private Boolean unread;
 

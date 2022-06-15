@@ -31,7 +31,7 @@ public class MessageController {
         List<MessageDto> result = messageService.getAllMessages(getUsername());
         log.info("Getting all messages for user {}", getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
-                .description("Your have " + result.size() + " messages")
+                .description("You have " + result.size() + " messages")
                 .messages(result)
                 .build());
 
@@ -42,7 +42,7 @@ public class MessageController {
         List<MessageDto> result = messageService.getAllUnreadMessages(getUsername());
         log.info("Getting all unread messages for user {}", getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
-                .description("Your have " + result.size() + " unread messages")
+                .description("You have " + result.size() + " unread messages")
                 .messages(result)
                 .build());
     }

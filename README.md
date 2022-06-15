@@ -2,16 +2,16 @@
 This is a simple REST API backend system that is responsible for handling messages between users.
 
 # Endpoints:
-In the root folder you can find "postman_collection.json" file for the tests in Postman.<br>
-**Write message -**<br>https://message-system-abra.herokuapp.com/api/v1/message/write-message
+In the root folder you can find "postman_collection.json" file for the tests in Postman.<br><br>
+**Write message** - creating message by using three fields(receiver, text and subject)<br>https://message-system-abra.herokuapp.com/api/v1/message/write-message
 
-**Get all messages for a specific user (logged-in user) -**<br>https://message-system-abra.herokuapp.com/api/v1/message/get-all-messages
+**Get all messages for a specific user (logged-in user)** - getting all messages for a logged-in user and make them "read"<br>https://message-system-abra.herokuapp.com/api/v1/message/get-all-messages
 
-**Get all UNREAD messages for a specific user (logged-in user) -**<br>https://message-system-abra.herokuapp.com/api/v1/message/get-all-unread-messages
+**Get all UNREAD messages for a specific user (logged-in user)** - getting all unread messages for a logged-in user and make them "read"<br>https://message-system-abra.herokuapp.com/api/v1/message/get-all-unread-messages
 
-**Read message (in this case every user has access to message, you need only the message ID) -**<br>https://message-system-abra.herokuapp.com/api/v1/message/read-message/{messageId}
+**Read message** - getting one message by messageID and make it "read" (in this case every user has access to message) <br>https://message-system-abra.herokuapp.com/api/v1/message/read-message/{messageId}
 
-**Delete message (in this case only sender or receiver can delete message by the message ID) -**<br>https://message-system-abra.herokuapp.com/api/v1/message/delete-message/{messageId}
+**Delete message** - delete one message by messageID (in this case only sender or receiver can delete message) <br>https://message-system-abra.herokuapp.com/api/v1/message/delete-message/{messageId}
 
 # Auth:
 In this project I described three users:

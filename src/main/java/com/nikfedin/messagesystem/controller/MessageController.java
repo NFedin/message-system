@@ -32,7 +32,7 @@ public class MessageController {
         log.info("Getting all messages for user {}", getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
                 .description(result.isEmpty() ? "Your messages were not found"
-                        : "Your have " + result.size() + " messages were found")
+                        : "Your have " + result.size() + " messages")
                 .messages(result)
                 .build());
 
@@ -44,7 +44,7 @@ public class MessageController {
         log.info("Getting all unread messages for user {}", getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.builder()
                 .description(result.isEmpty() ? "You have not unread messages"
-                        : "Your have " + result.size() + " unread messages were found")
+                        : "Your have " + result.size() + " unread messages")
                 .messages(result)
                 .build());
     }
